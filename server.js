@@ -25,12 +25,6 @@ app.post('/info',function(req,res){
   });
 });
 
-//   jwt.verify(token,'some_magic_word',function(err,decoded){
-//     if(err) throw err;
-//     res.json({email:decoded.email})
-//   })
-// });
-
 
 app.post('/register',function(req,res){
   var email = req.body.email
@@ -80,40 +74,4 @@ app.post('/login',function(req,res){
 
 
 
-
-// app.set('view engine','ejs');
-
-// app.get('/info',function(req,res){
-//   res.render('info');
-// });
-
-// app.post('/api/info',function(req,res){
-//   var token = req.body.token
-//   jwt.verify(token,'some_magic_word',function(err,decoded){
-//     if(err) throw err;
-//     res.json({email:decoded.email})
-//   })
-// });
-
-// app.post('/register',function(req,res){
-//
-//
-//
-//
-//   var email = req.body.email;
-//   var password = req.body.password;
-//   var token = jwt.sign(req.body,'some_magic_word',{
-//     expiresIn: 60
-//   });
-//   res.cookie('token',token);
-//   res.redirect('/info')
-//   // res.json({
-//   //   success: true,
-//   //   message: 'Enjoy your token!',
-//   //   token: token
-//   // });
-//
-//
-//
-// });
 app.listen(3000);
