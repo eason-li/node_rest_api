@@ -1,0 +1,93 @@
+<html>
+<head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+</head>
+<body>
+  <!-- <a href="/sign_up.html">sign up</a>
+  <a href="/sign_in.html">sign in</a> -->
+  <div>
+    case register
+    <form id="register" >
+      email:
+      <input type="email" name="email" >
+      password:
+      <input type="password" name="password" >
+      <a href="#">submit</a>
+    </form>
+  </div>
+  <div>
+    case login
+    <form id="login" >
+      email:
+      <input type="email" name="email" >
+      password:
+      <input type="password" name="password" >
+      <a href="#">submit</a>
+    </form>
+  </div>
+  <div>
+    case access api
+    <div>
+      <a href="#" id="query">submit</a>
+    </div>
+  </div>
+  <div>
+    case logout
+    <div>
+      <a href="#" id="logout">submit</a>
+    </div>
+  </div>
+
+
+ <script>
+  $(function(){
+    $('#register a').on('click',function(e){
+      e.preventDefault();
+      var email = $("#register input[name='email']").val();
+      var password = $("#register input[name='password']").val();
+      $.post('/register',{email:email,password:password},function(data){
+        alert('register success? ' + data.success);
+      });
+    });
+
+    $('#login a').on('click',function(e){
+      e.preventDefault();
+      var email = $("#login input[name='email']").val();
+      var password = $("#login input[name='password']").val();
+      $.post('/login',{email:email,password:password}).done(function(data){
+        alert('authentication success!');
+        window.location = '/?token=' + data.token;
+      }).fail(function(){
+        alert('authentication failed!')
+      });
+    });
+    $('#query').on('click',function(e){
+      e.preventDefault();
+      var token = getParameterByName('token')
+      $.post('/info',{token:token}).done(function(data){
+        alert('current account is ' + data.email);
+      }).fail(function(){
+        alert('not available to obtain this resource');
+      });
+    });
+    $('#logout').on('click',function(e){
+      e.preventDefault();
+      window.location = '/';
+    })
+  });
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+ </script>
+
+
+</body>
+</html>
