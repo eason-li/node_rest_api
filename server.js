@@ -5,11 +5,11 @@ var jwt = require('jsonwebtoken');
 var sha1 = require('sha1');
 
 if(!fs.existsSync('user_store'))
-  fs.mkdirSync('user_store');
+fs.mkdirSync('user_store');
 
 var app = express();
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.post('/info',function(req,res){
@@ -27,26 +27,26 @@ app.post('/info',function(req,res){
 
 
 app.post('/register',function(req,res){
-  var email = req.body.email
-  var password = req.body.password
+  var email = req.body.email;
+  var password = req.body.password;
   var filepath = 'user_store/' + email;
   fs.exists(filepath, function(exists){
     if(exists){
-      res.json({success:false,message:'email exists'})
+      res.json({success:false,message:'email exists'});
     }else{
       fs.appendFile(filepath,sha1(password),function(err){
         if(err) throw err;
         res.json({success:true});
-      })
+      });
     }
-  })
+  });
 });
 
 
 
 app.post('/login',function(req,res){
-  var email = req.body.email
-  var password = req.body.password
+  var email = req.body.email;
+  var password = req.body.password;
   var filepath = 'user_store/' + email;
   var token;
   fs.exists(filepath, function(exists){
@@ -59,17 +59,17 @@ app.post('/login',function(req,res){
           });
           res.json({success:true,token:token});
         }else{
-          res.status(401)
-          res.end()
+          res.status(401);
+          res.end();
         }
       });
     }else{
-      res.status(401)
-      res.end()
+      res.status(401);
+      res.end();
     }
-  })
+  });
 
-})
+});
 
 
 

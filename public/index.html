@@ -1,6 +1,6 @@
 <html>
 <head>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 </head>
 <body>
   <div>
@@ -35,10 +35,10 @@
       <a href="#" id="logout">submit</a>
     </div>
   </div>
-  
 
 
- <script>
+
+  <script>
   $(function(){
     $('#register a').on('click',function(e){
       e.preventDefault();
@@ -79,13 +79,13 @@
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
+    results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
- </script>
+  </script>
 
 
 </body>
